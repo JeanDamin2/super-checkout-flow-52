@@ -9,6 +9,9 @@ import ProtectedRoute from "@/components/admin/ProtectedRoute";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminLogin from "@/pages/AdminLogin";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
+import AdminProdutos from "@/pages/admin/AdminProdutos";
+import AdminVendas from "@/pages/admin/AdminVendas";
+import AdminClientes from "@/pages/admin/AdminClientes";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
@@ -37,9 +40,9 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
-              <Route path="produtos" element={<div>Produtos em desenvolvimento</div>} />
-              <Route path="vendas" element={<div>Vendas em desenvolvimento</div>} />
-              <Route path="clientes" element={<div>Clientes em desenvolvimento</div>} />
+              <Route path="produtos" element={<AdminProdutos />} />
+              <Route path="vendas" element={<AdminVendas />} />
+              <Route path="clientes" element={<AdminClientes />} />
               <Route path="configuracoes" element={<div>Configurações em desenvolvimento</div>} />
             </Route>
 

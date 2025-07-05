@@ -1,114 +1,109 @@
 
-import { Layout } from '../components/Layout';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { ShoppingCart, Package, BarChart3, Settings } from 'lucide-react';
 
 const Index = () => {
-  const stats = [
-    { label: 'Checkouts Ativos', value: '12', icon: '💳', color: 'text-green-400' },
-    { label: 'Produtos Cadastrados', value: '8', icon: '📦', color: 'text-blue-400' },
-    { label: 'Vendas Este Mês', value: 'R$ 24.300', icon: '💰', color: 'text-violet-400' },
-    { label: 'Taxa de Conversão', value: '12.5%', icon: '📈', color: 'text-orange-400' },
-  ];
-
   return (
-    <Layout>
-      <div className="space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-16">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-200 mb-4">
-            Super Checkout Dashboard
+        <div className="text-center mb-16">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Super Checkout
           </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Crie páginas de checkout de alta conversão com design profissional
-            e Order Bumps otimizados para maximizar suas vendas.
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Sistema completo de gestão de produtos e vendas online. 
+            Gerencie seus produtos, processe vendas e acompanhe seus resultados.
           </p>
-        </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
-            <div key={index} className="sc-card p-6 text-center animate-fade-in">
-              <div className="text-3xl mb-2">{stat.icon}</div>
-              <div className={`text-2xl font-bold ${stat.color} mb-1`}>
-                {stat.value}
-              </div>
-              <div className="text-gray-400 text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Quick Actions */}
-        <div className="sc-card p-8">
-          <h2 className="text-2xl font-bold text-gray-200 mb-6">🚀 Ações Rápidas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a
-              href="/products"
-              className="group p-6 bg-gray-700 rounded-lg border border-gray-600 hover:border-violet-500 transition-all duration-200 hover:bg-gray-600"
-            >
-              <div className="text-2xl mb-3 group-hover:scale-110 transition-transform">📦</div>
-              <h3 className="text-lg font-semibold text-gray-200 mb-2">Gerenciar Produtos</h3>
-              <p className="text-gray-400 text-sm">Adicione e configure seus produtos e order bumps</p>
-            </a>
-
-            <a
-              href="/checkouts"
-              className="group p-6 bg-gray-700 rounded-lg border border-gray-600 hover:border-violet-500 transition-all duration-200 hover:bg-gray-600"
-            >
-              <div className="text-2xl mb-3 group-hover:scale-110 transition-transform">💳</div>
-              <h3 className="text-lg font-semibold text-gray-200 mb-2">Criar Checkout</h3>
-              <p className="text-gray-400 text-sm">Configure suas páginas de venda com order bumps</p>
-            </a>
-
-            <a
-              href="/checkout/chk_01"
-              className="group p-6 bg-violet-900/30 rounded-lg border border-violet-700 hover:border-violet-500 transition-all duration-200 hover:bg-violet-900/50"
-            >
-              <div className="text-2xl mb-3 group-hover:scale-110 transition-transform">👀</div>
-              <h3 className="text-lg font-semibold text-violet-300 mb-2">Ver Demo</h3>
-              <p className="text-violet-400 text-sm">Teste uma página de checkout em funcionamento</p>
-            </a>
+          
+          <div className="space-x-4">
+            <Link to="/admin">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                Acessar Painel Admin
+              </Button>
+            </Link>
+            <Link to="/admin/login">
+              <Button variant="outline" size="lg">
+                Fazer Login
+              </Button>
+            </Link>
           </div>
         </div>
 
-        {/* Features Highlight */}
-        <div className="sc-card p-8">
-          <h2 className="text-2xl font-bold text-gray-200 mb-6">✨ Recursos Principais</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="text-violet-400 text-xl">🎯</div>
-                <div>
-                  <h3 className="text-gray-200 font-semibold">Order Bumps Inteligentes</h3>
-                  <p className="text-gray-400 text-sm">Aumente sua receita com ofertas complementares estratégicas</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="text-violet-400 text-xl">🎨</div>
-                <div>
-                  <h3 className="text-gray-200 font-semibold">Design Profissional</h3>
-                  <p className="text-gray-400 text-sm">Templates otimizados para conversão com visual moderno</p>
-                </div>
-              </div>
-            </div>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="text-violet-400 text-xl">📊</div>
-                <div>
-                  <h3 className="text-gray-200 font-semibold">Analytics Avançado</h3>
-                  <p className="text-gray-400 text-sm">Acompanhe suas métricas e otimize suas vendas</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="text-violet-400 text-xl">🔒</div>
-                <div>
-                  <h3 className="text-gray-200 font-semibold">Segurança Total</h3>
-                  <p className="text-gray-400 text-sm">Processamento seguro com certificação SSL</p>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Features */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <Card className="text-center">
+            <CardHeader>
+              <Package className="h-12 w-12 mx-auto text-blue-600 mb-4" />
+              <CardTitle>Gestão de Produtos</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Cadastre e gerencie seus produtos com facilidade. 
+                Defina preços, descrições e configurações especiais.
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center">
+            <CardHeader>
+              <ShoppingCart className="h-12 w-12 mx-auto text-green-600 mb-4" />
+              <CardTitle>Processamento de Vendas</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Sistema completo de checkout com suporte a múltiplos 
+                métodos de pagamento e order bumps.
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center">
+            <CardHeader>
+              <BarChart3 className="h-12 w-12 mx-auto text-purple-600 mb-4" />
+              <CardTitle>Relatórios e Analytics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Acompanhe suas vendas, receita e performance 
+                com relatórios detalhados em tempo real.
+              </CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="text-center">
+            <CardHeader>
+              <Settings className="h-12 w-12 mx-auto text-orange-600 mb-4" />
+              <CardTitle>Configurações Flexíveis</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Personalize seu checkout, configure termos legais 
+                e adapte o sistema às suas necessidades.
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center bg-white rounded-lg shadow-lg p-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Pronto para começar?
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Acesse o painel administrativo e comece a gerenciar suas vendas hoje mesmo.
+          </p>
+          <Link to="/admin/login">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              Entrar no Sistema
+            </Button>
+          </Link>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

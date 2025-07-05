@@ -23,41 +23,16 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // Use type assertion to bypass TypeScript strict typing
-        const supabaseAny = supabase as any;
-        
-        // Buscar total de vendas
-        const { count: vendasCount } = await supabaseAny
-          .from('vendas')
-          .select('*', { count: 'exact', head: true });
-
-        // Buscar total de produtos
-        const { count: produtosCount } = await supabaseAny
-          .from('produtos')
-          .select('*', { count: 'exact', head: true });
-
-        // Buscar total de clientes
-        const { count: clientesCount } = await supabaseAny
-          .from('clientes')
-          .select('*', { count: 'exact', head: true });
-
-        // Buscar receita total
-        const { data: receitaData } = await supabaseAny
-          .from('vendas')
-          .select('valor_total')
-          .eq('status', 'concluida');
-
-        const receitaTotal = receitaData?.reduce((sum: number, venda: any) => sum + Number(venda.valor_total), 0) || 0;
-
+        // For now, use mock data since tables don't exist yet
+        // TODO: Replace with real queries once tables are created
         setStats({
-          totalVendas: vendasCount || 0,
-          totalProdutos: produtosCount || 0,
-          totalClientes: clientesCount || 0,
-          receitaTotal,
+          totalVendas: 0,
+          totalProdutos: 0,
+          totalClientes: 0,
+          receitaTotal: 0,
         });
       } catch (error) {
         console.error('Erro ao buscar estatísticas:', error);
-        // Em caso de erro, definir valores padrão
         setStats({
           totalVendas: 0,
           totalProdutos: 0,
@@ -152,6 +127,9 @@ const AdminDashboard = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            <p className="text-gray-600 mb-4">
+              Seu projeto está conectado ao Supabase! Agora você pode começar a criar as tabelas necessárias para o sistema funcionar.
+            </p>
             <p className="text-gray-600">
               Use o menu lateral para navegar entre as diferentes seções do sistema:
             </p>
@@ -166,24 +144,24 @@ const AdminDashboard = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle>Status do Sistema</CardTitle>
+            <CardTitle>Próximos Passos</CardTitle>
             <CardDescription>
-              Tudo funcionando perfeitamente
+              Configure seu sistema
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">Banco de Dados</span>
-                <span className="text-sm text-green-600 font-medium">Online</span>
+                <span className="text-sm text-gray-600">Conexão Supabase</span>
+                <span className="text-sm text-green-600 font-medium">✓ Conectado</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">APIs</span>
-                <span className="text-sm text-green-600 font-medium">Funcionando</span>
+                <span className="text-sm text-gray-600">Tabelas do Banco</span>
+                <span className="text-sm text-orange-600 font-medium">Pendente</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Autenticação</span>
-                <span className="text-sm text-green-600 font-medium">Ativa</span>
+                <span className="text-sm text-green-600 font-medium">✓ Configurada</span>
               </div>
             </div>
           </CardContent>

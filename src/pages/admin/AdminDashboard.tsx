@@ -23,41 +23,38 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // Buscar total de vendas usando rpc ou query direta
-        const { data: vendasData, error: vendasError } = await supabase
-          .rpc('count_vendas')
-          .single();
+        // Use type assertion to bypass TypeScript strict typing
+        const supabaseAny = supabase as any;
         
-        if (vendasError) {
-          console.log('Usando fallback para vendas:', vendasError);
-          // Fallback: usar query direta
-          const { count: vendasCount } = await supabase
-            .from('vendas')
-            .select('*', { count: 'exact', head: true });
-          
-          const { count: produtosCount } = await supabase
-            .from('produtos')
-            .select('*', { count: 'exact', head: true });
+        // Buscar total de vendas
+        const { count: vendasCount } = await supabaseAny
+          .from('vendas')
+          .select('*', { count: 'exact', head: true });
 
-          const { count: clientesCount } = await supabase
-            .from('clientes')
-            .select('*', { count: 'exact', head: true });
+        // Buscar total de produtos
+        const { count: produtosCount } = await supabaseAny
+          .from('produtos')
+          .select('*', { count: 'exact', head: true });
 
-          // Buscar receita total
-          const { data: receitaData } = await supabase
-            .from('vendas')
-            .select('valor_total')
-            .eq('status', 'concluida');
+        // Buscar total de clientes
+        const { count: clientesCount } = await supabaseAny
+          .from('clientes')
+          .select('*', { count: 'exact', head: true });
 
-          const receitaTotal = receitaData?.reduce((sum: number, venda: any) => sum + Number(venda.valor_total), 0) || 0;
+        // Buscar receita total
+        const { data: receitaData } = await supabaseAny
+          .from('vendas')
+          .select('valor_total')
+          .eq('status', 'concluida');
 
-          setStats({
-            totalVendas: vendasCount || 0,
-            totalProdutos: produtosCount || 0,
-            totalClientes: clientesCount || 0,
-            receitaTotal,
-          });
-        }
+        const receitaTotal = receitaData?.reduce((sum: number, venda: any) => sum + Number(venda.valor_total), 0) || 0;
+
+        setStats({
+          totalVendas: vendasCount || 0,
+          totalProdutos: produtosCount || 0,
+          totalClientes: clientesCount || 0,
+          receitaTotal,
+        });
       } catch (error) {
         console.error('Erro ao buscar estatísticas:', error);
         // Em caso de erro, definir valores padrão
